@@ -12,6 +12,7 @@ class DashboardController extends Controller
     }
 
     public function index() {
-        echo 'login success';
+        
+        return view('backend.dashboard.index');
     }
 }
