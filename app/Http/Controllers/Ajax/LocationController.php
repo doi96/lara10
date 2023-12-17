@@ -5,28 +5,43 @@ namespace App\Http\Controllers\Ajax;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\DistrictRepositoryInterface as DistrictRepository;
-
+use App\Repositories\Interfaces\ProvinceRepositoryInterface as ProvinceRepository;
 class LocationController extends Controller
 {
 
     protected $districtRepository;
+    protected $provinceRepository;
 
-    public function __construct(DistrictRepository $districtRepository) {
+    public function __construct(
+        DistrictRepository $districtRepository,
+        ProvinceRepository $provinceRepository
+        ) {
         $this->districtRepository = $districtRepository;
+        $this->provinceRepository = $provinceRepository;
     }
 
     public function getLocation(Request $request) {
-        $province_id = $request->input('province_id');
-        $districts = $this->districtRepository->findDistrictByProvinceId($province_id);
+        // $province_id = $request->input('province_id');
+        $get = $request->input();
+
+        $html = '';
+        if($get['target'] == 'districts') {
+            $province = $this->provinceRepository->findById($get['data']['location_id'], ['code', 'name'], ['districts']);
+            $html = $this->renderHtml($province->districts);
+        } else if ($get['target'] == 'wards') {
+            $district = $this->districtRepository->findById($get['data']['location_id'], ['code', 'name'], ['wards']);
+            $html = $this->renderHtml($district->wards, 'Select Ward');
+        }
+
         $response = [
-            'html' => $this->renderHtml($districts)
+            'html' => $html
         ];
 
         return response()->json($response);
     }
 
-    public function renderHtml($districts) {
-        $html = '<option value="0">Select District</option>';
+    public function renderHtml($districts, $root = 'Select District') {
+        $html = '<option value="0">'.$root.'</option>';
         foreach ($districts as $district) {
             $html.= '<option value="'. $district->code. '">'. $district->name. '</option>';
         }

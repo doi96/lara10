@@ -20,4 +20,12 @@ class BaseRepository implements BaseRepositoryInterface
     public function all() {
         return $this->model->all();
     }
+
+    public function findById(
+        int $modelId, 
+        array $column = ['*'], 
+        array $relation = []
+        ) {
+        return $this->model->select($column)->with($relation)->findOrFail($modelId);
+    }
 }
