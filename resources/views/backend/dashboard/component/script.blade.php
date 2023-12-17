@@ -36,3 +36,4 @@
 <script src="{{ asset('backend/js/demo/sparkline-demo.js') }}"></script>
 <script src="{{ asset('backend/js/plugins/switchery/switchery.js') }}"></script>
 <script src="{{ asset('backend/library/library.js') }}"></script>
+<script src="{{ asset('backend/library/location.js') }}"></script>

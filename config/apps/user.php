@@ -1,6 +1,11 @@
 <?php 
     return [
-        'title' => 'User Management',
-        'tableHeading' => 'List Users',
+        'index' => [
+            'title' => 'User Management',
+            'table' => 'List Users'
+        ],
+        'create' => [
+            'title' => 'Add New User'
+        ]
     ];
 ?>

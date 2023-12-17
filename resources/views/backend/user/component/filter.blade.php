@@ -25,7 +25,7 @@
                         </span>
                     </div>
                 </div>
-                <a href="" class="btn btn-primary"><i class="fa fa-plus"></i> New User</a>
+                <a href=" {{ route('user.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New User</a>
             </div>
         </div>
     </div>
