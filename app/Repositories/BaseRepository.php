@@ -13,8 +13,15 @@ class BaseRepository implements BaseRepositoryInterface
 {
     protected $model;
 
-    public function __construct(Model $model) {
+    public function __construct(
+        Model $model
+    ) {
         $this->model = $model;
+    }
+
+    public function create(array $payload = []) {
+        $model = $this->model->create($payload);
+        return $model->fresh();
     }
 
     public function all() {

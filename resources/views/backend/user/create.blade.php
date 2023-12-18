@@ -37,17 +37,25 @@
                                 </div>
                             </div>
                         </div>
+                        @php
+                            $userCatelogue = [
+                                '>> Select Group User Permissions <<',
+                                'Admin',
+                                'Supplier',
+                                'Manager',
+                                'Cashier',
+                                'Accountant',
+                                'Collaborators'
+                            ]
+                        @endphp
                         <div class="row mb15">
                             <div class="col-lg-6">
                                 <div class="form-row">
                                     <label for="" class="control-label text-left">Group Permission User<span class="text-danger">(*)</span></label>
-                                    <select name="user_catalogue_id" class="form-control setupSelect2" id="">
-                                        <option value="0">Select Group Permission User</option>
-                                        <option value="1">Admin</option>
-                                        <option value="2">Collaborators</option>
-                                        {{-- @foreach ($userCatalogues as $userCatalogue)
-                                            <option value="{{ $userCatalogue->id }}">{{ $userCatalogue->name }}</option>
-                                        @endforeach --}}
+                                    <select name="user_catalogue_id" class="form-control setupSelect2">
+                                        @foreach ($userCatelogue as $key => $item)
+                                            <option value="{{ $key }}" @if(old('user_catalogue_id') == $key) selected @endif>{{ $item }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -103,7 +111,7 @@
                                         <option value="0">Select Province or City</option>
                                         @if (isset($provinces))
                                             @foreach ($provinces as $province)
-                                            <option value="{{ $province->code }}">{{ $province->name }}</option>
+                                            <option value="{{ $province->code }}" @if(old('province_id')== $province->code) selected @endif>{{ $province->name }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -157,3 +165,9 @@
         </div>
     </div>
 </form>
+
+<script>
+    var province_id = '{{ old('province_id') }}'
+    var district_id = '{{ old('district_id') }}'
+    var ward_id = '{{ old('ward_id') }}'
+</script>
