@@ -30,8 +30,7 @@ class UserService implements UserServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token','send', 're_password']);
-            $carbonDate = Carbon::createFromFormat('Y-m-d',$payload['birthday']);
-            $payload['birthday'] = $carbonDate->format('Y-m-d H:i:s');
+            $payload['birthday'] = $this->convertBirthDate($payload['birthday']);
             $payload['password'] = Hash::make($payload['password']);
             
             $user = $this->userRepository->create($payload);
@@ -44,5 +43,27 @@ class UserService implements UserServiceInterface
             // Log::error($e->getMessage());
             return false;
         }
+    }
+
+    public function update($id, $request) {
+        DB::beginTransaction();
+        try {
+            $payload = $request->except(['_token','send']);
+            $payload['birthday'] = $this->convertBirthDate($payload['birthday']);
+            $user = $this->userRepository->update($id, $payload);
+            DB::commit();
+            return true;
+        }catch(\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage(); die();
+            // Log::error($e->getMessage());
+            return false;
+        }
+    }
+
+    private function convertBirthDate($birthday = '') {
+        $carbonDate = Carbon::createFromFormat('Y-m-d',$birthday);
+        $birthday = $carbonDate->format('Y-m-d H:i:s');
+        return $birthday;
     }
 }

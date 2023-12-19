@@ -6,6 +6,9 @@
         ],
         'create' => [
             'title' => 'Add New User'
+        ],
+        'update' => [
+            'title' => 'Update User'
         ]
     ];
 ?>

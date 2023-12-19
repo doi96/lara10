@@ -36,8 +36,8 @@
                     <input type="checkbox" class="js-switch" checked/>
                 </td>
                 <td class="text-center"> 
-                    <a href='' type="button" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                    <a href='' type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    <a href='{{ route('user.edit',$user->id) }}' type="button" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                    <a href='{{ route('user.delete',$user->id) }}' type="button" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
             @endforeach
