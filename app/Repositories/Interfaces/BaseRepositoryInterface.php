@@ -17,6 +17,7 @@ interface BaseRepositoryInterface
         array $column = ['*'],
         array $condition = [],
         array $join = [],
-        int $papage = 20
+        array $extend = [],
+        int $papage = 1
     );
 }

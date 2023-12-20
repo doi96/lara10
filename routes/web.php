@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Ajax\LocationController;
+use App\Http\Controllers\Ajax\DashboardController as AjaxDashboardController;
 
 
 /*
@@ -34,6 +35,7 @@ Route::group(['middleware'=>['admin']],function(){
 
     /* AJAX */
     Route::get('/ajax/location/getLocation', [LocationController::class, 'getLocation']) -> name('ajax.location.index');
+    Route::post('/ajax/dashboard/changeStatus', [AjaxDashboardController::class, 'changeStatus']) -> name('ajax.dashboard.changeStatus');
 
     /* USER */
     Route::group(['prefix' => '/user'], function () {

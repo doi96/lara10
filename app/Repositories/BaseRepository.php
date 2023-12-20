@@ -23,14 +23,22 @@ class BaseRepository implements BaseRepositoryInterface
         array $column = ['*'],
         array $condition = [],
         array $join = [],
+        array $extend = [],
         int $papage = 20
+        
     ) {
-        $query = $this->model->select($column)->where($condition);
+        $query = $this->model->select($column)->where(function($query) use ($condition) {
+            if(isset($condition['keyword']) && !empty($condition['keyword'])) {
+                $query->where('name', 'LIKE', '%'.$condition['keyword'].'%');
+            }
+        });
         if(!empty($join)) {
             $query->join(...$join);
         }
 
-        return $query->paginate($papage);
+        return $query->paginate($papage)
+                     ->withQueryString()
+                     ->withPath(env('APP_URL').$extend['path']);
     }
 
     public function create(array $payload = []) {

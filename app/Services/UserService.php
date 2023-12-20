@@ -22,15 +22,11 @@ class UserService implements UserServiceInterface
     ) {
         $this->userRepository = $userRepository;
     }
-    public function paginate () {
-        $users = $this->userRepository->pagination([
-            'id',
-            'email',
-            'name',
-            'phone', 
-            'address',
-            'publish'
-        ]);
+
+    public function paginate($request) {
+        $condition['keyword'] = addslashes($request->input('keyword'));
+        $perPage = $request->integer('perpage');
+        $users = $this->userRepository->pagination($this->paginateSelect(), $condition, [], ['path' => 'user/index'], $perPage);
 
         return $users;
     }
@@ -83,10 +79,35 @@ class UserService implements UserServiceInterface
         }
     }
 
+    public function updateStatus($post = []) {
+        DB::beginTransaction();
+        try {
+            $payload[$post['field']] = (($post['value'] == 1)?0:1);
+
+            $user = $this->userRepository->update($post['modelId'],$payload);
+            DB::commit();
+            return true;
+        }catch(\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage(); die();
+            // Log::error($e->getMessage());
+            return false;
+        }
+    }
+
     private function convertBirthDate($birthday = '') {
         $carbonDate = Carbon::createFromFormat('Y-m-d',$birthday);
         $birthday = $carbonDate->format('Y-m-d H:i:s');
         return $birthday;
     }
 
+    public function paginateSelect() {
+        return [
+            'id',
+            'name',
+            'phone',
+            'address',
+            'publish'
+        ];
+    }
 }
