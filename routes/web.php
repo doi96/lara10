@@ -43,6 +43,7 @@ Route::group(['middleware'=>['admin']],function(){
         Route::get('/{id}/edit', [UserController::class, 'edit']) -> where(['id' => '[0-9]+'])-> name('user.edit');
         Route::post('{id}/update', [UserController::class, 'update'])-> where(['id' => '[0-9]+']) -> name('user.update');
         Route::get('{id}/delete', [UserController::class, 'delete']) -> where(['id' => '[0-9]+'])-> name('user.delete');
+        Route::delete('{id}/destroy', [UserController::class, 'destroy']) -> where(['id' => '[0-9]+'])-> name('user.destroy');
     });
 });
 

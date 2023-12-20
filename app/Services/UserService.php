@@ -23,7 +23,15 @@ class UserService implements UserServiceInterface
         $this->userRepository = $userRepository;
     }
     public function paginate () {
-        $users = $this->userRepository->getAllPaginate();
+        $users = $this->userRepository->pagination([
+            'id',
+            'email',
+            'name',
+            'phone', 
+            'address',
+            'publish'
+        ]);
+
         return $users;
     }
     public function create($request) {
@@ -61,9 +69,24 @@ class UserService implements UserServiceInterface
         }
     }
 
+    public function destroy($id) {
+        DB::beginTransaction();
+        try {
+            $user = $this->userRepository->delete($id);
+            DB::commit();
+            return true;
+        }catch(\Exception $e) {
+            DB::rollBack();
+            echo $e->getMessage(); die();
+            // Log::error($e->getMessage());
+            return false;
+        }
+    }
+
     private function convertBirthDate($birthday = '') {
         $carbonDate = Carbon::createFromFormat('Y-m-d',$birthday);
         $birthday = $carbonDate->format('Y-m-d H:i:s');
         return $birthday;
     }
+
 }

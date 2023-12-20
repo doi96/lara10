@@ -9,8 +9,9 @@
         </ul>
     </div>
 @endif
-<form action="" method="POST" class="box">
+<form action="{{ route('user.destroy',$user->id) }}" method="POST" class="box">
     @csrf
+    @method('DELETE')
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-4">
@@ -42,7 +43,7 @@
         </div>
         <hr>
         <div class="text-right mb15">
-            <button class="btn-primary" type="submit" name="send" value="send">Add User</button>
+            <button class="btn-primary" type="submit" name="send" value="send">Delete User</button>
         </div>
     </div>
 </form>

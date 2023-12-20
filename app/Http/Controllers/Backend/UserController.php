@@ -90,7 +90,7 @@ class UserController extends Controller
         if($this->userService->update($id, $request)) {
             return redirect()->route('user.index')->with('success', 'User Updated Successfully');
         }
-        return redirect()->route('user.index')->with('error', 'User Updated Unsuccessfully .Something went wrong');
+        return redirect()->route('user.index')->with('error', 'User Updated Unsuccessfully .Something went wrong!');
     }
 
     public function delete($id) {
@@ -102,5 +102,12 @@ class UserController extends Controller
             'config',
             'user'
         ));
+    }
+
+    public function destroy($id) {
+        if($this->userService->destroy($id)) {
+            return redirect()->route('user.index')->with('success', 'User Deleted Successfully');
+        }
+        return redirect()->route('user.index')->with('error', 'User Deleted Unsuccessfully .Please try again!');
     }
 }

@@ -33,7 +33,7 @@
                     <div class="address-item name"><strong>Ward:</strong></div>   
                 </td>
                 <td class="text-center"> 
-                    <input type="checkbox" class="js-switch" checked/>
+                    <input type="checkbox" value="{{ $user->publish }}" class="js-switch"  {{ ($user->publish == 1) ? 'checked' : '' }}/>
                 </td>
                 <td class="text-center"> 
                     <a href='{{ route('user.edit',$user->id) }}' type="button" class="btn btn-success"><i class="fa fa-edit"></i></a>

@@ -19,6 +19,20 @@ class BaseRepository implements BaseRepositoryInterface
         $this->model = $model;
     }
 
+    public function pagination(
+        array $column = ['*'],
+        array $condition = [],
+        array $join = [],
+        int $papage = 20
+    ) {
+        $query = $this->model->select($column)->where($condition);
+        if(!empty($join)) {
+            $query->join(...$join);
+        }
+
+        return $query->paginate($papage);
+    }
+
     public function create(array $payload = []) {
         $model = $this->model->create($payload);
         return $model->fresh();
@@ -27,6 +41,14 @@ class BaseRepository implements BaseRepositoryInterface
     public function update(int $id=0, array $payload = []) {
         $model = $this->findById($id);
         return $model->update($payload);
+    }
+
+    public function delete(int $id = 0) {
+        return $this->findById($id)->delete();
+    }
+
+    public function forceDelete(int $id = 0) {
+        return $this->findById($id)->forceDelete();
     }
 
     public function all() {
