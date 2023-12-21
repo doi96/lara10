@@ -36,6 +36,7 @@ Route::group(['middleware'=>['admin']],function(){
     /* AJAX */
     Route::get('/ajax/location/getLocation', [LocationController::class, 'getLocation']) -> name('ajax.location.index');
     Route::post('/ajax/dashboard/changeStatus', [AjaxDashboardController::class, 'changeStatus']) -> name('ajax.dashboard.changeStatus');
+    Route::post('/ajax/dashboard/changeStatusAll', [AjaxDashboardController::class, 'changeStatusAll']) -> name('ajax.dashboard.changeStatusAll');
 
     /* USER */
     Route::group(['prefix' => '/user'], function () {

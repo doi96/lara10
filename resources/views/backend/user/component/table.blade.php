@@ -16,7 +16,7 @@
             @foreach ($users as $user)
             <tr>
                 <td>
-                    <input type="checkbox" value="" class="input-checkbox checkBoxItem">
+                    <input type="checkbox" value="{{ $user->id }}" class="input-checkbox checkBoxItem">
                 </td>
                 <td>
                     <img src="{{ asset('backend/img/a1.jpg') }}" class="img-square img-lg">
@@ -32,7 +32,7 @@
                     <div class="address-item name"><strong>District:</strong></div>  
                     <div class="address-item name"><strong>Ward:</strong></div>   
                 </td>
-                <td class="text-center"> 
+                <td class="text-center js-switch-{{ $user->id }}"> 
                     <input type="checkbox" value="{{ $user->publish }}" 
                     class="js-switch status" 
                     data-field='publish' 

@@ -51,6 +51,10 @@ class BaseRepository implements BaseRepositoryInterface
         return $model->update($payload);
     }
 
+    public function updateByWhereIn(String $whereInField = '', array $whereIn = [], array $payload = []) {
+        return $this->model->whereIn($whereInField, $whereIn)->update($payload);
+    }
+
     public function delete(int $id = 0) {
         return $this->findById($id)->delete();
     }

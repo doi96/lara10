@@ -20,4 +20,5 @@ interface BaseRepositoryInterface
         array $extend = [],
         int $papage = 1
     );
+    public function updateByWhereIn(String $whereInField = '', array $whereIn = [],array $payload = []);
 }
