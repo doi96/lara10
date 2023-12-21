@@ -109,5 +109,18 @@ table strong {
 #checkAll,
 .checkBoxItem{
     width: 15px;
-    height: 15px;
+    height: 15px
+}
+
+.switchery-small {
+    border-radius: 20px;
+    height: 20px;
+    width: 33px
+}
+.switchery-small>small{
+    height: 20;
+    width: 20px
+}
+.select2-container--default {
+    margin-right: 10px !important;
 }

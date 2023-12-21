@@ -13,11 +13,34 @@
                     </select>
                 </div>
             </div>
+            @php
+                $userCatelogue = [
+                    '>> Select Group User Permissions <<',
+                    'Admin',
+                    'Supplier',
+                    'Manager',
+                    'Cashier',
+                    'Accountant',
+                    'Collaborators'
+                ];
+            @endphp
             <div class="action">
                 <div class="uk-flex uk-flex-middle">
+                    @php
+                        $publishArray = ['Un-Publish', 'Publish'];
+                        $publish = request('publish')?: old('publish');
+                    @endphp
+                    <select name="publish" class="form-control setupSelect2 ml10">
+                        <option value ="-1" selected="selected">All User Status</option>
+                        @foreach ($publishArray as $key => $value)
+                            <option {{ $publish == $key?'selected' : ''}} value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+
                     <select name="user_catalogue_id" class="form-control mr10 setupSelect2 ml10">
-                        <option value="0" selected='selected'>Choose Users Group</option>
-                        <option value="1">Admin</option>
+                        {{-- @foreach ($userCatelogue as $key => $item)
+                            <option value ={{ $key }}>{{ $item }}</option>
+                        @endforeach --}}
                     </select>
                     <div class="uk-search uk-flex uk-flex-middle mr10 ml10">
                         <div class="input-group">

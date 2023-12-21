@@ -29,12 +29,11 @@ class UserController extends Controller
 
     public function index(Request $request) {
         $users = $this->userService->paginate($request);
-
         $config = $this->config();
 
         $config['seo'] = config('apps.user');
 
-        $template = 'backend.user.index';
+        $template = 'backend.user.user.index';
         return view('backend.dashboard.layout', compact(
             'template',
             'config',
@@ -49,7 +48,7 @@ class UserController extends Controller
         $config['method'] = 'create';
         $provinces = $this->provinceRepository->all();
 
-        $template = 'backend.user.store';
+        $template = 'backend.user.user.store';
         return view('backend.dashboard.layout', compact(
             'template',
             'config',
@@ -77,7 +76,7 @@ class UserController extends Controller
         $config['method'] = 'edit';
         $provinces = $this->provinceRepository->all();
 
-        $template = 'backend.user.store';
+        $template = 'backend.user.user.store';
         return view('backend.dashboard.layout', compact(
             'template',
             'config',
@@ -96,7 +95,7 @@ class UserController extends Controller
     public function delete($id) {
         $config['seo'] = config('apps.user');
         $user = $this->userRepository->findById($id);
-        $template = 'backend.user.delete';
+        $template = 'backend.user.user.delete';
         return view('backend.dashboard.layout', compact(
             'template',
             'config',

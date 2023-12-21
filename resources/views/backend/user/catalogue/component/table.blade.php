@@ -27,10 +27,10 @@
                     <div class="info-item name"><strong>Phone:</strong> {{ $user->phone }}</div>
                 </td>
                 <td> 
-                    <div class="address-item name"><strong>Street:</strong> {{ $user->address }}</div>
-                    <div class="address-item email"><strong>Province / City:</strong></div>
-                    <div class="address-item name"><strong>District:</strong></div>  
-                    <div class="address-item name"><strong>Ward:</strong></div>   
+                    <div class="address-item address"><strong>Street:</strong> {{ $user->address }}</div>
+                    <div class="address-item province"><strong>Province / City:</strong></div>
+                    <div class="address-item district"><strong>District:</strong></div>  
+                    <div class="address-item ward"><strong>Ward:</strong></div>   
                 </td>
                 <td class="text-center js-switch-{{ $user->id }}"> 
                     <input type="checkbox" value="{{ $user->publish }}" 
