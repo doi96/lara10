@@ -27,7 +27,7 @@ class UserService implements UserServiceInterface
         $condition['keyword'] = addslashes($request->input('keyword'));
         $condition['publish'] = $request->integer('publish');
         $perPage = $request->integer('perpage');
-        $users = $this->userRepository->pagination($this->paginateSelect(), $condition, [], ['path' => 'user/index'], $perPage);
+        $users = $this->userRepository->pagination($this->paginateSelect(), $condition, [], ['path' => '/user/index'], $perPage);
 
         return $users;
     }
@@ -83,7 +83,7 @@ class UserService implements UserServiceInterface
     public function updateStatus($post = []) {
         DB::beginTransaction();
         try {
-            $payload[$post['field']] = (($post['value'] == 1)?0:1);
+            $payload[$post['field']] = (($post['value'] == 1)?2:1);
 
             $user = $this->userRepository->update($post['modelId'],$payload);
             DB::commit();

@@ -13,6 +13,13 @@ class UserCatalogue extends Model
     protected $fillable = [
         'name',
         'publish',
+        'description',
         
     ];
+
+    protected $table = 'user_catalogues';
+
+    public function users() {
+        return $this->hasMany(User::class, 'user_catalogue_id','id');
+    }
 }

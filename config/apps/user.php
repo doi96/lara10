@@ -9,6 +9,9 @@
         ],
         'update' => [
             'title' => 'Update User'
+        ],
+        'delete' => [
+            'title' => 'Delete User'
         ]
     ];
 ?>

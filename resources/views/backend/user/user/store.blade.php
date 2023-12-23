@@ -42,8 +42,8 @@
                         @php
                             $userCatelogue = [
                                 '>> Select Group User Permissions <<',
+                                'Super Admin',
                                 'Admin',
-                                'Supplier',
                                 'Manager',
                                 'Cashier',
                                 'Accountant',

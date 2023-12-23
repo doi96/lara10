@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Services\Interfaces\UserCatalogueServiceInterface;
-use App\Repositories\Interfaces\UserRepositoryInterface as UserCatalogueRepository;
+use App\Repositories\Interfaces\UserCatalogueRepositoryInterface as UserCatalogueRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
@@ -24,20 +24,23 @@ class UserCatalogueService implements UserCatalogueServiceInterface
     }
 
     public function paginate($request) {
+
         $condition['keyword'] = addslashes($request->input('keyword'));
         $condition['publish'] = $request->integer('publish');
         $perPage = $request->integer('perpage');
-        $users = $this->userCatalogueRepository->pagination($this->paginateSelect(), $condition, [], ['path' => 'user/index'], $perPage);
+        $userCatalogues = $this->userCatalogueRepository->pagination(
+            $this->paginateSelect(), 
+            $condition, [], 
+            ['path' => '/user/calalogue/index'], 
+            $perPage, ['users']
 
-        return $users;
+        );
+        return $userCatalogues;
     }
     public function create($request) {
         DB::beginTransaction();
         try {
-            $payload = $request->except(['_token','send', 're_password']);
-            $payload['birthday'] = $this->convertBirthDate($payload['birthday']);
-            $payload['password'] = Hash::make($payload['password']);
-            
+            $payload = $request->except(['_token','send']);
             $user = $this->userCatalogueRepository->create($payload);
 
             DB::commit();
@@ -54,7 +57,6 @@ class UserCatalogueService implements UserCatalogueServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token','send']);
-            $payload['birthday'] = $this->convertBirthDate($payload['birthday']);
             $user = $this->userCatalogueRepository->update($id, $payload);
             DB::commit();
             return true;
@@ -83,7 +85,7 @@ class UserCatalogueService implements UserCatalogueServiceInterface
     public function updateStatus($post = []) {
         DB::beginTransaction();
         try {
-            $payload[$post['field']] = (($post['value'] == 1)?0:1);
+            $payload[$post['field']] = (($post['value'] == 1)?2:1);
 
             $user = $this->userCatalogueRepository->update($post['modelId'],$payload);
             DB::commit();
@@ -122,9 +124,7 @@ class UserCatalogueService implements UserCatalogueServiceInterface
         return [
             'id',
             'name',
-            'email',
-            'phone',
-            'address',
+            'description',
             'publish'
         ];
     }

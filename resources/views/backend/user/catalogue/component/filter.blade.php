@@ -1,4 +1,4 @@
-<form action="{{ route('user.index') }}">
+<form action="{{ route('user.catalogue.index') }}">
     <div class="filter-wrapper">
         <div class="uk-flex uk-flex-middle uk-flex-space-between">
             <div class="perpage">
@@ -13,35 +13,17 @@
                     </select>
                 </div>
             </div>
-            @php
-                $userCatelogue = [
-                    '>> Select Group User Permissions <<',
-                    'Admin',
-                    'Supplier',
-                    'Manager',
-                    'Cashier',
-                    'Accountant',
-                    'Collaborators'
-                ];
-            @endphp
             <div class="action">
                 <div class="uk-flex uk-flex-middle">
                     @php
-                        $publishArray = ['Un-Publish', 'Publish'];
                         $publish = request('publish')?: old('publish');
                     @endphp
                     <select name="publish" class="form-control setupSelect2 ml10">
-                        <option value ="-1" selected="selected">All User Status</option>
-                        @foreach ($publishArray as $key => $value)
+                        @foreach (config('apps.general.publish') as $key => $value)
                             <option {{ $publish == $key?'selected' : ''}} value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
 
-                    <select name="user_catalogue_id" class="form-control mr10 setupSelect2 ml10">
-                        {{-- @foreach ($userCatelogue as $key => $item)
-                            <option value ={{ $key }}>{{ $item }}</option>
-                        @endforeach --}}
-                    </select>
                     <div class="uk-search uk-flex uk-flex-middle mr10 ml10">
                         <div class="input-group">
                             <input type="text" name="keyword" value="{{ request('keyword') ?: old('keyword') }}" placeholder="Enter value to search..." class="form-control">
@@ -52,7 +34,7 @@
                             </span>
                         </div>
                     </div>
-                    <a href=" {{ route('user.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New User</a>
+                    <a href=" {{ route('user.catalogue.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> New Group User</a>
                 </div>
             </div>
         </div>

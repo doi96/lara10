@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function index(Request $request) {
         $users = $this->userService->paginate($request);
-        $config = $this->config();
+        // $config = $this->config();
 
         $config['seo'] = config('apps.user');
 

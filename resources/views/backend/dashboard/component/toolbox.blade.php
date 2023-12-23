@@ -6,9 +6,9 @@
         <i class="fa fa-wrench"></i>
     </a>
     <ul class="dropdown-menu dropdown-user">
-        <li><a href="#" class="changeStatusAll" data-field="publish" data-model="User" data-value="1">Publish All Users Selected</a>
+        <li><a href="#" class="changeStatusAll" data-field="publish" data-model="{{ $model }}" data-value="2">Publish All Selected</a>
         </li>
-        <li><a href="#" class="changeStatusAll" data-field="publish" data-model="User" data-value="0">Un-publish All Users Selected</a>
+        <li><a href="#" class="changeStatusAll" data-field="publish" data-model="{{ $model }}" data-value="1">Un-publish All Selected</a>
         </li>
     </ul>
     <a class="close-link">

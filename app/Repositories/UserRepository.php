@@ -25,8 +25,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         array $condition = [],
         array $join = [],
         array $extend = [],
-        int $papage = 20
-        
+        int $perpage = 1,
+        array $relations = []
     ) {
         $query = $this->model->select($column)->where(function($query) use ($condition) {
             if(isset($condition['keyword']) && !empty($condition['keyword'])) {
@@ -35,7 +35,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
                       ->orWhere('address', 'LIKE', '%'.$condition['keyword'].'%')
                       ->orWhere('phone', 'LIKE', '%'.$condition['keyword'].'%');
             }
-            if(isset($condition['publish']) && $condition['publish'] != -1) {
+            if(isset($condition['publish']) && $condition['publish'] != 0) {
                 $query->where('publish', '=', $condition['publish']);
             }
             return $query;
@@ -44,7 +44,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             $query->join(...$join);
         }
 
-        return $query->paginate($papage)
+        return $query->paginate($perpage)
                      ->withQueryString()
                      ->withPath(env('APP_URL').$extend['path']);
     }

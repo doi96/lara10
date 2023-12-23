@@ -1,4 +1,4 @@
-@include('backend.dashboard.component.breadcrumb', ['title' => $config['seo']['create']['title']])
+@include('backend.dashboard.component.breadcrumb', ['title' => $config['seo']['delete']['title']])
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -9,7 +9,7 @@
         </ul>
     </div>
 @endif
-<form action="{{ route('user.destroy',$user->id) }}" method="POST" class="box">
+<form action="{{ route('user.catalogue.destroy',$userCatalogue->id) }}" method="POST" class="box">
     @csrf
     @method('DELETE')
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -26,14 +26,14 @@
                         <div class="row mb15">
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-left">Email <span class="text-danger">(*)</span></label>
-                                    <input type="text" name="email" value="{{  old('email', ($user->email) ?? '') }}" class="form-control" placeholder="Email" autocomplete="off" readonly>
+                                    <label for="" class="control-label text-left">Group Name <span class="text-danger">(*)</span></label>
+                                    <input type="text" name="name" value="{{  old('name', ($userCatalogue->name) ?? '') }}" class="form-control" placeholder="Group Name" autocomplete="off" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-row">
-                                    <label for="" class="control-label text-left">Full Name <span class="text-danger">(*)</span></label>
-                                    <input type="text" name="name" value="{{  old('name', ($user->name) ?? '') }}" class="form-control" placeholder="Full Name" autocomplete="off" readonly>
+                                    <label for="" class="control-label text-left">Description <span class="text-danger">(*)</span></label>
+                                    <input type="text" name="description" value="{{  old('description', ($userCatalogue->description) ?? '') }}" class="form-control" placeholder="Full Name" autocomplete="off" readonly>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
         </div>
         <hr>
         <div class="text-right mb15">
-            <button class="btn-primary" type="submit" name="send" value="send">Delete User</button>
+            <button class="btn-danger" type="submit" name="send" value="send">Delete Group User</button>
         </div>
     </div>
 </form>

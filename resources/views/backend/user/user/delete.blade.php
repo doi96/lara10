@@ -1,4 +1,4 @@
-@include('backend.dashboard.component.breadcrumb', ['title' => $config['seo']['create']['title']])
+@include('backend.dashboard.component.breadcrumb', ['title' => $config['seo']['delete']['title']])
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -43,7 +43,7 @@
         </div>
         <hr>
         <div class="text-right mb15">
-            <button class="btn-primary" type="submit" name="send" value="send">Delete User</button>
+            <button class="btn-danger" type="submit" name="send" value="send">Delete User</button>
         </div>
     </div>
 </form>

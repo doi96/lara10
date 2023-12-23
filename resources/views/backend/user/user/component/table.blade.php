@@ -38,7 +38,7 @@
                     data-field='publish' 
                     data-model="User"  
                     data-modelId="{{ $user->id }}"
-                    {{ ($user->publish == 1) ? 'checked' : '' }}/>
+                    {{ ($user->publish == 2) ? 'checked' : '' }}/>
                 </td>
                 <td class="text-center"> 
                     <a href='{{ route('user.edit',$user->id) }}' type="button" class="btn btn-success"><i class="fa fa-edit"></i></a>

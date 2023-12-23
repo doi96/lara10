@@ -27,12 +27,11 @@
             <div class="action">
                 <div class="uk-flex uk-flex-middle">
                     @php
-                        $publishArray = ['Un-Publish', 'Publish'];
+                        
                         $publish = request('publish')?: old('publish');
                     @endphp
                     <select name="publish" class="form-control setupSelect2 ml10">
-                        <option value ="-1" selected="selected">All User Status</option>
-                        @foreach ($publishArray as $key => $value)
+                        @foreach (config('apps.general.publish') as $key => $value)
                             <option {{ $publish == $key?'selected' : ''}} value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
