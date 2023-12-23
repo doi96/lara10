@@ -7,6 +7,7 @@
             <th class="text-center">Avatar</th>
             <th class="text-center">User Informations</th>
             <th class="text-center">Address</th>
+            <th class="text-center">Group User</th>
             <th class="text-center">Status</th>
             <th class="text-center">Actions</th>
         </tr>
@@ -31,6 +32,9 @@
                     <div class="address-item province"><strong>Province / City:</strong></div>
                     <div class="address-item district"><strong>District:</strong></div>  
                     <div class="address-item ward"><strong>Ward:</strong></div>   
+                </td>
+                <td class="text-center"> 
+                   {{ $user->user_catalogues->name }}
                 </td>
                 <td class="text-center js-switch-{{ $user->id }}"> 
                     <input type="checkbox" value="{{ $user->publish }}" 

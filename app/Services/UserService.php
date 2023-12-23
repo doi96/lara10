@@ -100,7 +100,6 @@ class UserService implements UserServiceInterface
         DB::beginTransaction();
         try {
             $payload[$post['field']] = $post['value'];
-
             $flag = $this->userRepository->updateByWhereIn('id',$post['id'],$payload);
             DB::commit();
             return true;
@@ -125,7 +124,8 @@ class UserService implements UserServiceInterface
             'email',
             'phone',
             'address',
-            'publish'
+            'publish',
+            'user_catalogue_id'
         ];
     }
 }
