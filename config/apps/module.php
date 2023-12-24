@@ -4,7 +4,7 @@
             [
                 'title' => 'User Managements',
                 'icon' => 'fa fa-group',
-                'name' => 'user',
+                'name' => ['user'],
                 'subModule' => [
                     [
                         'title' => 'User Management',
@@ -20,7 +20,7 @@
             [
                 'title' => 'Post Managements',
                 'icon' => 'fa fa-file',
-                'name' => 'post',
+                'name' => ['post'],
                 'subModule' => [
                     [
                         'title' => 'Post Management',
@@ -29,6 +29,18 @@
                     [
                         'title' => 'Group Post Management',
                         'route' => '/post/catalogue/index'
+                    ]
+                    
+                ]  
+            ],
+            [
+                'title' => 'General Config',
+                'icon' => 'fa fa-cog',
+                'name' => ['language'],
+                'subModule' => [
+                    [
+                        'title' => 'Language Management',
+                        'route' => '/language/index'
                     ]
                     
                 ]  
